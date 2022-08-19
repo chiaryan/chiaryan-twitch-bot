@@ -1,0 +1,16 @@
+node_modules/xmlbuilder/lib/XMLProcessingInstruction.js
+test.js
+node_modules/**
+.vscode/**
+misc
+misc/**
+weebtally.js
+jsconfig.json
+*.d.ts
+lib/initchannels.js
+.env
+channeldata.json
+error.txt
+channelsettings.json
+nam.txt
+channelsettingsobj.txt
