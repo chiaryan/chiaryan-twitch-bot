@@ -46,7 +46,7 @@ ENABLE_AWS=FALSE
 
 ### `./channelsettings.json`: Channel parameters
 
-The `./channelsettings.json` is a [JSON](https://www.json.org/json-en.html) file containing an array of the channels that the bot will connect to on startup. Some of the channels can also be augmented to affect the behaviour of the chatbot in those channels.
+The `./data/channelsettings.json` is a [JSON](https://www.json.org/json-en.html) file containing an array of the channels that the bot will connect to on startup. Some of the channels can also be augmented to affect the behaviour of the chatbot in those channels.
 
 * `"name"`: the name of the channel that the bot will connect to.
 * `"id"`: the public, unique ID of that user. There are [tools](https://www.streamweasels.com/tools/convert-twitch-username-to-user-id/#) available to translate a name to a channel ID.
