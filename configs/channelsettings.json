@@ -1,0 +1,19 @@
+[
+  {
+    "name": "chiaryan",
+    "id": "180782930",
+    "settings": {
+      "coolTime": 200,
+      "queueTime": 200
+    }
+  },
+  {
+    "name": "forsen",
+    "id": "22484632",
+    "settings": {
+      "banphraseApiURL": "https://forsen.tv/api/v1/banphrases/test",
+      "excludedCommands": ["bttvemotes", "ffzemotes", "globalemotes"],
+      "messageLength": 200 
+    }
+  }
+]
