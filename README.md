@@ -26,7 +26,15 @@ Create a new Twitch account for your bot. If you want to use a preexisting accou
 
 To allow the bot to use the Twitch API you need to [register an application](https://dev.twitch.tv/docs/authentication/register-app/) on **your** account (not the bot account!) on the Twitch dev console. This will give you the `CLIENT_ID` and `CLIENT_SECRET` to use API endpoints.
 
-You need to create some configuration files before using the bot.
+### Install dependencies
+```bash
+$ npm i
+```
+
+You need to create some configuration files before using the bot. Templates for these files are located in `configs` to copy into the root.
+```bash
+$ cp -rtT configs .
+```
 ### `./.env`: Environment Variables
 
 We use the [`dotenv`](https://www.npmjs.com/package/dotenv) package to store permanent config info. Create a `.env` config file in the root of the repository. The following fields need to be present in the file:
