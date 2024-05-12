@@ -28,3 +28,8 @@ if (process.env.ENABLE_AWS == 'TRUE') {
         console.log(err)
     })
 }
+
+// Treat all unhandled promise rejections as errors
+process.on("unhandledRejection", err => {
+    throw err;
+})
