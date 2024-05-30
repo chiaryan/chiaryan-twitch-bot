@@ -7,6 +7,7 @@ require('./lib/chiarbot')
 
 // add modules for various commands
 require('./commands/botcommands')
+require('./commands/devcommands')
 require('./commands/braille')
 require('./commands/fancify')
 require('./commands/hangman')
