@@ -30,5 +30,3 @@ var writeErrToFile = async err => {
 
 process.on('uncaughtException', writeErrToFile);
 process.on("unhandledRejection", writeErrToFile);
-
-(undefined).nam;
