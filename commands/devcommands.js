@@ -1,7 +1,7 @@
 const {Command, WhisperedCommand} = require('../lib/command')
 const {create: Channel, get: getChannel, checkConnectedChannels, cleanChannelList: syncChannels, modifyChannelProperty, reloadChannelProperties, CHANNELPROPS} = require('../lib/channel')
 const { PartiQLUpdate, awsEnabled } = require('../lib/awsutils')
-const utils = require('./lib/utils')
+const utils = require('../lib/utils')
 const { spawn } = require('child_process')
 
 new Command('commandtest', function (bot, a, b) {

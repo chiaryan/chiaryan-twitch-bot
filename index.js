@@ -20,17 +20,15 @@ if (process.env.ENABLE_AWS == 'TRUE') {
     
     // enable the commands that do weeb hunting
     require('./commands/awscommands')
-    // allow writing the error file to error.txt when error
-    process.on('uncaughtException', (err) => {
-        require('fs').writeFile('error.txt',err.stack,'utf8',(error) => {
-            console.log(error)
-            process.exit(1)
-        })
-        console.log(err)
-    })
 }
 
-// Treat all unhandled promise rejections as errors
-process.on("unhandledRejection", err => {
-    throw err;
-})
+var writeErrToFile = async err => {
+    console.log(err);
+    await require("fs/promises").writeFile('error.txt', err.stack, 'utf8');
+    process.exit(1);
+}
+
+process.on('uncaughtException', writeErrToFile);
+process.on("unhandledRejection", writeErrToFile);
+
+(undefined).nam;
