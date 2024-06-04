@@ -1,5 +1,6 @@
 const {Command, WhisperedCommand} = require('../lib/command')
 const {create, list: channelList} = require('../lib/channel')
+const {info : log} = require("winston");
 
 // list of all white cards in the base game
 const WHITE_CARDS = [
@@ -760,7 +761,7 @@ new Command(['cards', 'cardsagainsthumanity'], function (bot, action) {
                 }, 60000);
                 // in 30s, remind the players that 30s are left, and call out the players who haven't made their submission yet for public humiliation.
                 cards.timeouts.playRemind = setTimeout(() => {
-                    // console.log(cards)
+                    // log(cards)
                     bot.respond(`30 seconds left to submit your cards. ${cards.players.filter((player, i) => player.choiceIndexes.length == 0 && !(cards.czarIndex == i)).map(pl => pl["display-name"]).join(', ')}, please make your submissions FeelsWeirdMan Example Usage: /w spergbot02 ^cards choose ${' 1 2 3'.slice(0,numOfCards*2)}`)
                 }, 30000);
             }
@@ -780,7 +781,7 @@ new Command(['cards', 'cardsagainsthumanity'], function (bot, action) {
                 if (player.choiceIndexes.length == 0) {
                     // if they still haven't made a submission, give them a strike
                     player.strikes++
-                    console.log(`\nplayer ${player["display-name"]} has been given a strike`)
+                    log(`\nplayer ${player["display-name"]} has been given a strike`)
                     if (player.hand.length > 10) {
                         // if the player has more than 10 cards, ie from a 3 cards prompt, yoink their cards back to 10
                         cards.whiteDiscardPile.push(...player.hand.splice(10))
@@ -990,7 +991,7 @@ new Command(['cards', 'cardsagainsthumanity'], function (bot, action) {
             break
     }
 
-    // console.log(cards)
+    // log(cards)
 })
 
 new WhisperedCommand('cards', function (bot, action) {

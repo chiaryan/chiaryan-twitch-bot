@@ -5,6 +5,7 @@ const assert = require('assert')
 const {emoteFallback} = require('../lib/emotes')
 const {queryGlobalData, queryUserData, queryUserDataByUsername, updateUsername, updateGlobalData, updateUserData, dbClient} = require('../lib/awsutils')
 const {QueryCommand, ScanCommand, UpdateItemCommand} = require('@aws-sdk/client-dynamodb')
+const {info : log} = require("winston");
 
 /** @typedef {import('@aws-sdk/client-dynamodb').QueryCommandInput} QueryCommandInput  */
 /** @typedef {import('@aws-sdk/client-dynamodb').UpdateItemCommandInput} UpdateItemCommandInput  */
@@ -135,7 +136,7 @@ new Command(['huntweebs','hw'], async function (bot) {
             bot.respond(`${bot.user['display-name']} hunted ${weebsCaught} weebs and now has ${cagedWeebs} weebs in the cage! ${weebsCaught == 69 ? 'gachiGASM': bot.f('forsenSheffy')} Do ^killweebs <number> to slaughter them!`)
         } catch (error) {
             bot.respond('error updating database FeelsDankMan .')
-            console.log(error);
+            log(error);
             bot.cool()
         }
     }
@@ -279,7 +280,7 @@ new Command(['freeweebs','releaseweebs'],async function({user, respond, cool, f}
         }
     } catch (error) {
         respond('error retrieving data FeelsDankMan')
-        console.log(error);
+        log(error);
     }
 },{helpText: 'freeweebs: Frees all your caged weebs FeelsGoodMan ✨', tags:["weebhunt"]})
 
@@ -369,7 +370,7 @@ new Command('weebrank', async function({cool, user, respond, f}, name) {
 /**
  * displays the top 10 weebkilling users 
  */
-new Command('weebslayers', await function({cool, channel, respond, f}) {
+new Command('weebslayers', async function({cool, channel, respond, f}) {
     
     let command = new ScanCommand({
         TableName: 'UserData',

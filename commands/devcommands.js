@@ -3,6 +3,8 @@ const {create: Channel, get: getChannel, checkConnectedChannels, cleanChannelLis
 const { PartiQLUpdate, awsEnabled } = require('../lib/awsutils')
 const utils = require('../lib/utils')
 const { spawn } = require('child_process')
+const {info : log} = require("winston");
+
 
 new Command('commandtest', function (bot, a, b) {
     bot.respond(`modifiers: ${Array.from(arguments).slice(1).join(',')}, trailing sentence: ${bot.sentence}, username: ${bot.user['display-name']}, channel: ${bot.channel.name}`, true)
@@ -131,7 +133,7 @@ new Command('dev', function(bot) {
                     }
                     if (allSucceeded) {
                         respond('global emotes reloaded')
-                        console.log('reloaded global emotes')
+                        log('reloaded global emotes')
                     }
                 })
             } else if (name == 'all') {

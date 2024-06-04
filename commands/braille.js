@@ -1,6 +1,7 @@
 const Jimp = require('jimp')
 const utils = require('../lib/utils')
 const {Command} = require('../lib/command')
+const {info : log} = require("winston");
 
 var fonts = new Map();
 Jimp.loadFont(Jimp.FONT_SANS_128_BLACK).then(fnt => {
@@ -59,7 +60,7 @@ new Command('braille', function ({
                     if (!(totalPixelColour / (w * h) > threshold) != !isInverted) {
                         brailleChar ^= 128
                     }
-                    // console.log(totalPixelColour / (w * h))
+                    // log(totalPixelColour / (w * h))
                 };
                 [...Array(3).keys()].map(ele => ele * 100 + 1).forEach((row, rowIndex) => { //for each row
                     [...Array(32).keys()].map(ele => ele * 41 + 1).forEach(col => { //for each character
@@ -90,7 +91,7 @@ new Command('braille', function ({
                     }
                 }
                 output = outputArr.join(' ');
-                // console.log(output.match(new RegExp(`${isInverted ? '⠀' : '⣿'}+`, 'g')).map(ele => ele.length).join(' '))
+                // log(output.match(new RegExp(`${isInverted ? '⠀' : '⣿'}+`, 'g')).map(ele => ele.length).join(' '))
                 respond(user['display-name'] + ', ' + output)
                 cool(7000)
             })

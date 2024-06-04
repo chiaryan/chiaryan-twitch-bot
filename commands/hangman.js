@@ -2,6 +2,7 @@ const utils = require('../lib/utils')
 const {Command, WhisperedCommand} = require('../lib/command')
 const {create, get: getChannel} = require('../lib/channel')
 const {emoteFallback} = require('../lib/emotes')
+const {info : log} = require("winston");
 
 create.prototype.hangman = {
     /** @type {NodeJS.Timeout} */
@@ -51,14 +52,14 @@ new WhisperedCommand('hangman', function(bot, channelName) {
                         hangman.reset()
                     } else {
                         utils.checkApi(channel, phrase, function () { hangman.reset() }, function () {
-                            console.log(`${bot.user.username} has started a hangman in ${channel.name} with phrase ${phrase}`);
+                            log(`${bot.user.username} has started a hangman in ${channel.name} with phrase ${phrase}`);
                             hangman.phrase = phrase
                             hangman.triesLeft = 6
                             // set a timeout to stop the hangman and send a timeout message and store the id so we can clear it later
                             hangman.timeout = setTimeout(() => {
                                 bot.chat(`hangman timed out FeelsDankMan the answer was: ${hangman.phrase} FeelsDankMan whisper the bot "^hangman ${channel.name.slice(1)} 𝘱𝘩𝘳𝘢𝘴𝘦" to start a new game`, channel)
                                 hangman.reset()
-                                console.log('hangman timed out')
+                                log('hangman timed out')
                             }, 30000)
                             bot.chat(`${bot.user['display-name']} has started a hangman ${emoteFallback(channel, 'PagChomp')} ${hangman.guess} FeelsDankMan Do ^guess <letter> to guess a letter. You have ${hangman.triesLeft} guesses.`, channel)
                         })
@@ -67,7 +68,7 @@ new WhisperedCommand('hangman', function(bot, channelName) {
                     bot.chat(`${bot.user['display-name']} tried to start a hangman with a weeb emote and deserves to be publicly shamed DansGame`, channel)
                 }
             } else {
-                console.log(`${bot.user.username} tried started a hangman in ${channel.name} with phrase ${phrase}, but hangman is still running`)
+                log(`${bot.user.username} tried started a hangman in ${channel.name} with phrase ${phrase}, but hangman is still running`)
             }
         }
     }
@@ -89,7 +90,7 @@ new Command('guess', function (bot) {
                 hangman.timeout = setTimeout(() => {
                     bot.respond(`hangman timed out FeelsDankMan the phrase was: ${hangman.phrase} FeelsDankMan whisper the bot "^hangman ${bot.channel.name.slice(1)} 𝘱𝘩𝘳𝘢𝘴𝘦" to start a new game`)
                     hangman.reset()
-                    // console.log('hangman timed out')
+                    // log('hangman timed out')
                 }, 60000)
     
                 if (hangman.lettersLeft.has(letter)) { // if the letter is guessed correctly

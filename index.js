@@ -1,6 +1,9 @@
 // load environment variables
 require('dotenv').config()
 
+//configure logger
+require("./lib/logger");
+
 // connect the bot
 require('./lib/chiarbot')
 
@@ -23,7 +26,7 @@ if (process.env.ENABLE_AWS == 'TRUE') {
 }
 
 var writeErrToFile = async err => {
-    console.log(err);
+    require("winston").info(err);
     await require("fs/promises").writeFile('error.txt', err.stack, 'utf8');
     process.exit(1);
 }
