@@ -24,12 +24,3 @@ if (process.env.ENABLE_AWS == 'TRUE') {
     // enable the commands that do weeb hunting
     require('./commands/awscommands')
 }
-
-var writeErrToFile = async err => {
-    require("winston").info(err);
-    await require("fs/promises").writeFile('error.txt', err.stack, 'utf8');
-    process.exit(1);
-}
-
-process.on('uncaughtException', writeErrToFile);
-process.on("unhandledRejection", writeErrToFile);
